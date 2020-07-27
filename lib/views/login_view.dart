@@ -57,7 +57,7 @@ class LoginView extends StatelessWidget {
         toolTip: "Sign In With Github",
         color: MyColors.PURPLE,
         text: "Sign in with Github",
-        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 14.0),
+        //padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 14.0),
         onPressed: () {},
       ),
     );

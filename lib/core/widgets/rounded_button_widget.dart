@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:group_6/core/my_colors.dart';
 
 class RoundedButtonWidget extends StatelessWidget {
   const RoundedButtonWidget(
       {Key key,
-      this.toolTip,
-      this.color,
-      this.text,
+      this.toolTip = "",
+      this.color = MyColors.BLUE,
+      this.text = "Button",
       this.padding,
       @required this.onPressed})
       : super(key: key);

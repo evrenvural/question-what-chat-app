@@ -12,7 +12,7 @@ class MenuWidget extends StatelessWidget {
       child: Column(
         children: <Widget>[
           buildTopImage(),
-          Expanded(child: CategoryList()),
+          Expanded(child: CategoryList(onCategorySelected: onCategorySelected)),
         ],
       ),
     );

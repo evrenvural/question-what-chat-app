@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:group_6/core/widgets/appbar_widget.dart';
 
+import '../core/widgets/menu_widget.dart';
+
 class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
 
@@ -11,6 +13,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBarWidget(
         onPressed: () {},
       ),
+      drawer: MenuWidget(),
       body: Column(
         children: <Widget>[
           Spacer(flex: 2),

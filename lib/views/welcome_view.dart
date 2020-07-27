@@ -22,14 +22,15 @@ class WelcomeView extends StatelessWidget {
 
 Container buildTopContainer(context) {
   return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          alignment: Alignment.topCenter,
-          image: AssetImage("assets/robotgif.gif"),
-          fit: BoxFit.fill,
-        ),
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        alignment: Alignment.topCenter,
+        image: AssetImage("assets/robotgif.gif"),
+        fit: BoxFit.fill,
       ),
-      child: buildButtonContainer(context));
+    ),
+    //child: buildSignInButton(context)
+  );
 }
 
 Container buildButtonContainer(context) {
@@ -47,10 +48,10 @@ Container buildButtonContainer(context) {
 Center buildSignInButton(context) {
   return Center(
     child: RoundedButtonWidget(
-      toolTip: "welcome",
+      toolTip: "WELCOME",
       color: MyColors.BLUE,
-      text: "welcome",
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 14.0),
+      text: "WELCOME",
+      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
       onPressed: () {},
     ),
   );

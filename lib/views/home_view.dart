@@ -4,14 +4,17 @@ import 'package:group_6/core/widgets/appbar_widget.dart';
 import '../core/widgets/menu_widget.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
+  HomeView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      key: _drawerKey,
       appBar: AppBarWidget(
-        onPressed: () {},
+        onPressed: () => _drawerKey.currentState.openDrawer(),
       ),
       drawer: MenuWidget(),
       body: Column(

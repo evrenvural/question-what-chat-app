@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:group_6/core/my_colors.dart';
+import 'package:group_6/core/route_names.dart';
+import 'package:group_6/service/myauth.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   AppBarWidget({
@@ -21,6 +23,18 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: isDark ? MyColors.PURPLE : Colors.white,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.account_circle,
+            color: Theme.of(context).primaryColor,
+          ),
+          onPressed: () async {
+            await MyAuth().signOut();
+            Navigator.pushReplacementNamed(context, RouteNames.LOGIN);
+          },
+        )
+      ],
       leading: IconButton(
         icon: Icon(
           Icons.menu,

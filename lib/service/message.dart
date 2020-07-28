@@ -8,7 +8,7 @@ class MessageService {
   final String categoriesKey = "categories";
   final String messagesKey = "messages";
 
-  DatabaseReference messageQuery(Category category) {
+  Query messageQuery(Category category) {
     return FirebaseService()
         .database
         .reference()
@@ -31,7 +31,7 @@ class MessageService {
   Future<bool> sendMessage(Category category, Message message) async {
     var currentUser = await MyAuth().getCurrentUser();
 
-    var messagesReference = messageQuery(category);
+    var messagesReference = messageQuery(category) as DatabaseReference;
 
     var user = User(currentUser.uid, currentUser.email);
 

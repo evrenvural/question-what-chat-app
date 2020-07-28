@@ -1,11 +1,16 @@
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:group_6/core/widgets/appbar_widget.dart';
 import 'package:group_6/core/widgets/chat/message_list.dart';
 import 'package:group_6/core/widgets/chat/message_sender.dart';
 import 'package:group_6/core/widgets/menu_widget.dart';
+import 'package:group_6/core/widgets/my_message_widget.dart';
+import 'package:group_6/core/widgets/mylist.dart';
+import 'package:group_6/core/widgets/your_message_widget.dart';
 import 'package:group_6/model/category.dart';
 import 'package:group_6/model/message.dart';
 import 'package:group_6/provider/category_provider.dart';
+import 'package:group_6/provider/user_provider.dart';
 import 'package:group_6/service/message.dart';
 
 class ChatView extends StatefulWidget {
@@ -41,7 +46,7 @@ class _ChatViewState extends State<ChatView> {
         null,
       ),
     );
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +68,12 @@ class _ChatViewState extends State<ChatView> {
       body: Column(
         children: <Widget>[
           Expanded(
-            child: MessageList(
-              category: category,
+            child: FirebaseAnimatedList(
+              query: MessageService().messageQuery(category),
+              //reverse: true,
+              itemBuilder: (context, snapshot, animation, index) {
+                return buildMessageView(Message.fromJsom(snapshot.value));
+              },
             ),
           ),
           Container(
@@ -74,5 +83,12 @@ class _ChatViewState extends State<ChatView> {
         ],
       ),
     );
+  }
+
+  Widget buildMessageView(Message message) {
+    final user = UserProvider().currentUser;
+    return user.uid == message.user.id
+        ? MyMessageWidget(user: user, message: message)
+        : YourMessageWidget(user: user, message: message);
   }
 }

@@ -5,7 +5,6 @@ import 'package:group_6/model/category.dart';
 import 'package:group_6/model/message.dart';
 import 'package:group_6/provider/user_provider.dart';
 import 'package:group_6/service/message.dart';
-import 'package:group_6/service/myauth.dart';
 
 class MessageList extends StatelessWidget {
   final Category category;
@@ -14,19 +13,6 @@ class MessageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: FutureBuilder(
-      future: MyAuth().getCurrentUser(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return buildFirebaseAnimatedList();
-        }
-        return Center(child: CircularProgressIndicator());
-      },
-    ));
-  }
-
-  FirebaseAnimatedList buildFirebaseAnimatedList() {
     return FirebaseAnimatedList(
       query: MessageService().messageQuery(category),
       defaultChild: Center(child: CircularProgressIndicator()),

@@ -53,6 +53,8 @@ flutter:
     - assets/robot_full.gif
     - assets/robot_profile.gif
     - assets/background_with_tech.jpg
+    - assets/robotgif.gif
+    - assets/welcome_robot.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

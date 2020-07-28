@@ -4,6 +4,7 @@ import 'package:group_6/core/route_names.dart';
 import 'package:group_6/service/myauth.dart';
 import 'package:group_6/views/signin/sign_base.dart';
 import 'package:group_6/views/signin/sign_up_page.dart';
+import 'package:group_6/core/my_colors.dart';
 
 class SigninPage extends StatefulWidget {
   SigninPage({Key key}) : super(key: key);
@@ -14,13 +15,18 @@ class SigninPage extends StatefulWidget {
 
 class _SigninPageState extends SignBase<SigninPage> {
   String email = "", password = "";
+  GlobalKey<ScaffoldState> scaffold = GlobalKey();
 
   void onSigninTap() async {
-    await MyAuth().signIn(email, password);
-    var user = await MyAuth().getCurrentUser();
-
-    if (user != null) {
-      Navigator.of(context).pushNamed(RouteNames.HOME);
+    try {
+      await MyAuth().signIn(email, password);
+      var user = await MyAuth().getCurrentUser();
+      if (user != null) {
+        Navigator.of(context).pushNamed(RouteNames.WELCOME);
+      }
+    } catch (e) {
+      scaffold.currentState
+          .showSnackBar(SnackBar(content: Text("Hatalı Giriş")));
     }
   }
 
@@ -50,6 +56,7 @@ class _SigninPageState extends SignBase<SigninPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: scaffold,
         body: Center(
           child: buildCard(buildFormContent()),
         ),
@@ -78,7 +85,7 @@ class _SigninPageState extends SignBase<SigninPage> {
         SizedBox(height: 20),
         buildBottomRow([
           buildFlatButton("Sign up", onSignupTap),
-          buildButton("Sign in", Colors.orange, onSigninTap),
+          buildButton("Sign in", MyColors.PURPLE, onSigninTap),
         ]),
       ],
     );

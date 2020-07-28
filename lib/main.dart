@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.data == null) {
               return SigninPage();
             } else {
-              return HomeView();
+              return WelcomeView();
             }
           }
           return CircularProgressIndicator();

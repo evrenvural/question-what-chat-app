@@ -18,6 +18,7 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  final ScrollController scrollController = ScrollController();
 
   Category category;
 
@@ -28,6 +29,8 @@ class _ChatViewState extends State<ChatView> {
     setState(() {
       category = widget.category;
     });
+    // scrollController.jumpTo(scrollController.position.maxScrollExtent);
+
     super.initState();
   }
 
@@ -40,6 +43,14 @@ class _ChatViewState extends State<ChatView> {
         null,
       ),
     );
+
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent * 2,
+      curve: Curves.easeOut,
+      duration: const Duration(milliseconds: 300),
+    );
+
+    //scrollController.jumpTo(scrollController.position.maxScrollExtent);
   }
 
   @override
@@ -63,6 +74,7 @@ class _ChatViewState extends State<ChatView> {
           Expanded(
               child: MessageList(
             category: category,
+            scrollController: scrollController,
           )),
           Container(
             height: mediaQueryData.size.height * 1 / 14,

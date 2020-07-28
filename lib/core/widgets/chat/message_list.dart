@@ -12,8 +12,10 @@ import 'package:group_6/service/myauth.dart';
 
 class MessageList extends StatelessWidget {
   final Category category;
+  final ScrollController scrollController;
 
-  const MessageList({Key key, this.category}) : super(key: key);
+  const MessageList({Key key, this.category, this.scrollController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class MessageList extends StatelessWidget {
     return FirebaseAnimatedList(
       query: MessageService().messageQuery(category),
       defaultChild: Center(child: CircularProgressIndicator()),
+      controller: scrollController,
       itemBuilder: (context, snapshot, animation, index) {
         return buildMessageView(
           Message.fromJsom(snapshot.value),
@@ -42,36 +45,9 @@ class MessageList extends StatelessWidget {
   }
 
   Widget buildMessageView(Message message) {
-    final currentUser = UserProvider().currentUser;
-    return buildMyMessageWidget(currentUser, message);
-  }
-
-  Widget buildMyMessageWidget(FirebaseUser user, Message message) {
+    final user = UserProvider().currentUser;
     return user.uid == message.user.id
         ? MyMessageWidget(user: user, message: message)
         : YourMessageWidget(user: user, message: message);
-  }
-
-  Card buildOldMessageCard(FirebaseUser currentUser, Message message) {
-    return Card(
-      margin: EdgeInsets.all(5),
-      color: currentUser.uid == message.user.id
-          ? Colors.grey.withOpacity(0.1)
-          : null,
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              message.text,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Text(message.user.name),
-          ],
-        ),
-      ),
-    );
   }
 }

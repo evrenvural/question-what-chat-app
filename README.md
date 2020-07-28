@@ -22,7 +22,8 @@ Giriş yaptıktan sonra size bir hoşgeldiniz demek istedik.Welcome butonuna bas
 
 Devamında  uygulamayla ilgili bilgi içeren ve aynı zamanda kategorilere yönlendiren bir sayfa açılacaktır.
 
-![4](https://user-images.githubusercontent.com/56632363/88678185-da3a2f80-d0f6-11ea-99a8-6b9a9537650d.png)
+![4](https://user-images.githubusercontent.com/56632363/88684851-f55c6d80-d0fd-11ea-8180-55b52218a3f0.png)
+
 
 Burada sol taraftaki menüden istediğiniz kategoriyi seçip mesajlaşma sayfasına geçebilirsiniz.
 

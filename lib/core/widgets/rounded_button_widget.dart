@@ -33,7 +33,7 @@ class RoundedButtonWidget extends StatelessWidget {
               .headline5
               .copyWith(color: color, fontWeight: FontWeight.w900),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
       ),
     );
   }

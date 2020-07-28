@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:group_6/core/my_colors.dart';
+import 'package:group_6/core/route_names.dart';
 import 'package:group_6/core/widgets/rounded_button_widget.dart';
 
 class WelcomeView extends StatelessWidget {
@@ -19,7 +20,7 @@ class WelcomeView extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           alignment: Alignment.topCenter,
-          image: AssetImage("assets/robotgif.gif"),
+          image: AssetImage("assets/welcome_robot.gif"),
           fit: BoxFit.fill,
         ),
       ),
@@ -37,7 +38,9 @@ class WelcomeView extends StatelessWidget {
         color: MyColors.BLUE,
         text: "WELCOME",
         padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 42.0),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(RouteNames.HOME);
+        },
       ),
     );
   }

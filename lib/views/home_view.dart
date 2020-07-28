@@ -14,8 +14,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double window_width = MediaQuery.of(context).size.width;
-    final double window_height = MediaQuery.of(context).size.height;
+    final double windowWidth = MediaQuery.of(context).size.width;
+    final double windowHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       key: _drawerKey,
@@ -31,10 +31,10 @@ class HomeView extends StatelessWidget {
         children: <Widget>[
           Container(
             padding: EdgeInsets.fromLTRB(
-                window_width * 0.05,
-                window_height * 0.05,
-                window_width * 0.05,
-                window_height * 0.025),
+                windowWidth * 0.05,
+                windowHeight * 0.05,
+                windowWidth * 0.05,
+                windowHeight * 0.025),
             child: Center(
               child: Text(
                 homeMessage,

@@ -20,7 +20,7 @@ class _SigninPageState extends SignBase<SigninPage> {
     var user = await MyAuth().getCurrentUser();
 
     if (user != null) {
-      Navigator.of(context).pushNamed(RouteNames.HOME);
+      Navigator.of(context).pushNamed(RouteNames.WELCOME);
     }
   }
 

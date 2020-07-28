@@ -19,7 +19,7 @@ class _SignupPageState extends SignBase<SignupPage> {
     if (password1 == password2) {
       var userId = await MyAuth().signUp(email, password1);
       if (userId != null) {
-        Navigator.of(context).pushNamed(RouteNames.HOME);
+        Navigator.of(context).pushNamed(RouteNames.WELCOME);
       }
     } else {}
   }

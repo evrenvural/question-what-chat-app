@@ -19,7 +19,7 @@ class _SigninPageState extends SignBase<SigninPage> {
 
   void onSigninTap() async {
     try {
-      await MyAuth().signIn(email, password);
+      await MyAuth().signIn(email.trim(), password.trim());
       var user = await MyAuth().getCurrentUser();
       if (user != null) {
         Navigator.of(context).pushNamed(RouteNames.WELCOME);

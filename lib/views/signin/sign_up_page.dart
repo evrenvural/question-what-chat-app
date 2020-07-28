@@ -19,9 +19,9 @@ class _SignupPageState extends SignBase<SignupPage> {
   GlobalKey<ScaffoldState> scaffold = GlobalKey();
 
   void onSignupTap() async {
-    if (password1 == password2) {
+    if (password1.trim() == password2.trim()) {
       try {
-        var userId = await MyAuth().signUp(email, password1);
+        var userId = await MyAuth().signUp(email.trim(), password1.trim());
         if (userId != null) {
           Navigator.of(context).pushNamed(RouteNames.WELCOME);
         }

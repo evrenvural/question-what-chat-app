@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:group_6/core/route_names.dart';
+import 'package:group_6/provider/user_provider.dart';
 import 'package:group_6/service/myauth.dart';
 import 'package:group_6/views/signin/sign_base.dart';
 import 'package:group_6/views/signin/sign_in_page.dart';
@@ -23,6 +24,8 @@ class _SignupPageState extends SignBase<SignupPage> {
       try {
         var userId = await MyAuth().signUp(email.trim(), password1.trim());
         if (userId != null) {
+          var user = await MyAuth().getCurrentUser();
+          UserProvider().currentUser = user;
           Navigator.of(context).pushNamed(RouteNames.WELCOME);
         }
       } catch (e) {

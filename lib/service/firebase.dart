@@ -12,6 +12,8 @@ class FirebaseService {
     apiKey: 'AIzaSyBBmhieyLMwtQzgZZNEhKBN3r0rxOUkSXA',
   );
 
+  FirebaseDatabase database;
+
   Future<void> start() async {
     final FirebaseApp app = await FirebaseApp.configure(
       name: name,
@@ -19,16 +21,17 @@ class FirebaseService {
     );
     assert(app != null);
 
-    final database = FirebaseDatabase(app: app, databaseURL: databaseURL);
-    
-    var databaseReference = database.reference();
-    var nameRef = databaseReference.child("name");
+    database = FirebaseDatabase(app: app, databaseURL: databaseURL);
 
-    final onValue = nameRef.onValue;
-    onValue.listen((event) {
-      print(event.snapshot.value);
-    });
+    //var databaseReference = database.reference();
+    //var nameRef = databaseReference.child("name");
+    //final onValue = nameRef.onValue;
+    //onValue.listen((event) {
+    //  print(event.snapshot.value);
+    //});
   }
+
+  Query get testQuery => database.reference().child("messages");
 
   static final FirebaseService _firebaseService = FirebaseService._internal();
 

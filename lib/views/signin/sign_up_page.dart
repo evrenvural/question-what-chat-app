@@ -5,6 +5,8 @@ import 'package:group_6/service/myauth.dart';
 import 'package:group_6/views/signin/sign_base.dart';
 import 'package:group_6/views/signin/sign_in_page.dart';
 
+import '../../core/my_colors.dart';
+
 class SignupPage extends StatefulWidget {
   SignupPage({Key key}) : super(key: key);
 
@@ -14,14 +16,24 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends SignBase<SignupPage> {
   String email = "", password1 = "", password2 = "";
+  GlobalKey<ScaffoldState> scaffold = GlobalKey();
 
   void onSignupTap() async {
     if (password1 == password2) {
-      var userId = await MyAuth().signUp(email, password1);
-      if (userId != null) {
-        Navigator.of(context).pushNamed(RouteNames.WELCOME);
+      try {
+        var userId = await MyAuth().signUp(email, password1);
+        if (userId != null) {
+          Navigator.of(context).pushNamed(RouteNames.WELCOME);
+        }
+      } catch (e) {
+        scaffold.currentState.showSnackBar(SnackBar(
+            content:
+                Text("Girdiğiniz email veya şifre kurallara uygun değil.")));
       }
-    } else {}
+    } else {
+      scaffold.currentState
+          .showSnackBar(SnackBar(content: Text("Hatalı Şifre")));
+    }
   }
 
   void onSigninTap() {
@@ -56,6 +68,7 @@ class _SignupPageState extends SignBase<SignupPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: scaffold,
         body: Center(
           child: buildCard(buildFormContent()),
         ),
@@ -91,7 +104,7 @@ class _SignupPageState extends SignBase<SignupPage> {
         SizedBox(height: 20),
         buildBottomRow([
           buildFlatButton("Sign in", onSigninTap),
-          buildButton("Sign up", Colors.orange, onSignupTap),
+          buildButton("Sign up", MyColors.BLUE, onSignupTap),
         ]),
       ],
     );

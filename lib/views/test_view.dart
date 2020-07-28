@@ -52,8 +52,13 @@ class _TestViewState extends State<TestView> {
             FloatingActionButton(
               child: Icon(Icons.send),
               onPressed: () {
-                MessageService()
-                    .sendMessage(category, Message(0, controller1.text, null));
+                MessageService().sendMessage(
+                    category,
+                    Message(
+                      0,
+                      controller1.text,
+                      null,
+                    ));
               },
             ),
           ],

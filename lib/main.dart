@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:group_6/core/route_names.dart';
+import 'package:group_6/provider/user_provider.dart';
 import 'package:group_6/service/firebase.dart';
 import 'package:group_6/service/myauth.dart';
 import 'package:group_6/views/chat_view.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.data == null) {
               return SigninPage();
             } else {
+              UserProvider().currentUser = snapshot.data;
               return WelcomeView();
             }
           }

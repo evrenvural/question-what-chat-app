@@ -1,10 +1,16 @@
 
-import 'package:group_6/model/category.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:group_6/service/firebase.dart';
 
 class CategoryProvider {
-  
-  Future<List<Category>> getCategories() async{
-    return testData;//fetch from firebase
+
+  final String categoriesKey = "categories_info";
+
+  Query get categoryQuery {
+    return FirebaseService()
+        .database
+        .reference()
+        .child(categoriesKey);
   }
   
   static final CategoryProvider _categoryProvider = CategoryProvider._internal();
@@ -14,14 +20,4 @@ class CategoryProvider {
   }
   
   CategoryProvider._internal();
-  
 }
-
-const testData = <Category>[
-  const Category(0, "Flutter", "description"),
-  const Category(1, "Dart", "description"),
-  const Category(2, "Android", "description"),
-  const Category(3, "Kotlin", "description"),
-  const Category(4, "NodeJs", "description"),
-  const Category(5, "React", "description"),
-];

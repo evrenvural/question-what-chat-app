@@ -1,3 +1,4 @@
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:group_6/core/category/category_list_item.dart';
@@ -11,33 +12,23 @@ class CategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: CategoryProvider().getCategories(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.error != null) {
-            return Center(child: Text("Error"));
-          }
-          return buildListView(snapshot.data);
-        }
-        return Center(child: CircularProgressIndicator());
-      },
-    );
+    return buildListView();
   }
 
-  Widget buildListView(List<Category> categories) {
+  Widget buildListView() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15,0,15,15),
-      child: ListView.separated(
-        itemCount: categories.length,
-        separatorBuilder: (context, index) {
-          return SizedBox(height: 10);
-        },
-        itemBuilder: (context, index) {
-          final category = categories[index];
-          return InkWell(
-              onTap: () => onCategorySelected?.call(category),
-              child: CategoryListItem(category: category));
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+      child: FirebaseAnimatedList(
+        query: CategoryProvider().categoryQuery,
+        defaultChild: Center(child: CircularProgressIndicator()),
+        itemBuilder: (context, snapshot, animation, index) {
+          final category = Category.fromJson(snapshot.value);
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: InkWell(
+                onTap: () => onCategorySelected?.call(category),
+                child: CategoryListItem(category: category)),
+          );
         },
       ),
     );

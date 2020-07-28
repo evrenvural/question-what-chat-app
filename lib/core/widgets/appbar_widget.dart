@@ -26,8 +26,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       actions: <Widget>[
         IconButton(
           icon: Icon(
-            Icons.account_circle,
-            color: Theme.of(context).primaryColor,
+            Icons.exit_to_app,
+            color: isDark ? Colors.white : MyColors.PURPLE,
           ),
           onPressed: () async {
             await MyAuth().signOut();

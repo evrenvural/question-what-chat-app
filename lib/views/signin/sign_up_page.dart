@@ -68,6 +68,7 @@ class _SignupPageState extends SignBase<SignupPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: MyColors.BLUE,
         key: scaffold,
         body: Center(
           child: buildCard(buildFormContent()),

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:group_6/core/route_names.dart';
+import 'package:group_6/service/firebase.dart';
 import 'package:group_6/service/myauth.dart';
 import 'package:group_6/views/chat_view.dart';
 import 'package:group_6/views/home_view.dart';
@@ -38,6 +39,11 @@ class MyApp extends StatelessWidget {
   }
 
   Future<FirebaseUser> getUser() async {
+    startServices();
     return await MyAuth().getCurrentUser();
+  }
+
+  Future<void> startServices() async{
+    await FirebaseService().start();
   }
 }

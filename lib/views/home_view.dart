@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:group_6/core/my_colors.dart';
 import 'package:group_6/core/widgets/appbar_widget.dart';
 import 'package:group_6/model/category.dart';
 import 'package:group_6/views/chat_view.dart';
@@ -7,11 +8,14 @@ import '../core/widgets/menu_widget.dart';
 
 class HomeView extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  static String homeMessage = createMessage();
 
   HomeView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final double window_width = MediaQuery.of(context).size.width;
+    final double window_height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       key: _drawerKey,
@@ -25,8 +29,25 @@ class HomeView extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Spacer(flex: 2),
-          Flexible(flex: 4, child: buildBackgroundPhoto())
+          Container(
+            padding: EdgeInsets.fromLTRB(
+                window_width * 0.05,
+                window_height * 0.05,
+                window_width * 0.05,
+                window_height * 0.025),
+            child: Center(
+              child: Text(
+                homeMessage,
+                style: TextStyle(
+                    fontFamily: 'RobotoMono',
+                    color: MyColors.PURPLE,
+                    fontSize: 20.0),
+              ),
+            ),
+          ),
+          Spacer(flex: 1),
+          Flexible(flex: 4, child: buildBackgroundPhoto()),
+          Spacer(flex: 1)
         ],
       ),
     );
@@ -41,6 +62,15 @@ class HomeView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  static String createMessage() {
+    String message = "Welcome to the QuestionWhat App.";
+    message += "\n Now the doors of a different world are being opened here.";
+    message += "\n The people inside are the future itself.";
+    message += "\n If you feel ready for this...";
+    message += "\n You can go to the QuestionWhat App with your questions →";
+    return message;
   }
 
   // TODO : Parametre göndermem gerektiği için pushNamed kullanamadım.

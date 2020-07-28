@@ -1,28 +1,63 @@
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:group_6/model/category.dart';
+import 'package:group_6/model/message.dart';
+import 'package:group_6/provider/user_provider.dart';
+import 'package:group_6/service/message.dart';
+import 'package:group_6/service/myauth.dart';
 
 class MessageList extends StatelessWidget {
-  const MessageList({Key key}) : super(key: key);
+  final Category category;
+
+  const MessageList({Key key, this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return buildMessageView();
-        },
-      ),
+        child: FutureBuilder(
+      future: MyAuth().getCurrentUser(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return buildFirebaseAnimatedList();
+        }
+        return Center(child: CircularProgressIndicator());
+      },
+    ));
+  }
+
+  FirebaseAnimatedList buildFirebaseAnimatedList() {
+    return FirebaseAnimatedList(
+      query: MessageService().messageQuery(category),
+      defaultChild: Center(child: CircularProgressIndicator()),
+      itemBuilder: (context, snapshot, animation, index) {
+        return buildMessageView(
+          Message.fromJsom(snapshot.value),
+        );
+      },
     );
   }
 
-  Container buildMessageView() {
-    return Container(
-      height: 50,
+  Widget buildMessageView(Message message) {
+    final currentUser = UserProvider().currentUser;
+    return Card(
       margin: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.6),
-        borderRadius: BorderRadius.circular(15),
+      color: currentUser.uid == message.user.id
+          ? Colors.grey.withOpacity(0.1)
+          : null,
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              message.text,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Text(message.user.name),
+          ],
+        ),
       ),
     );
   }

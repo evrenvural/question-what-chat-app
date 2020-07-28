@@ -13,7 +13,7 @@ Uygulamayı indirdikten sonra öncelikle sizden kullanıcı adı ve parolanızı
 ![2](https://user-images.githubusercontent.com/56632363/88678165-d60e1200-d0f6-11ea-80e3-1e635ed8a2a5.png)
 ![3](https://user-images.githubusercontent.com/56632363/88678177-d8706c00-d0f6-11ea-83ac-c09cf101d702.png)
 
-![1](https://user-images.githubusercontent.com/56632363/88678020-abbc5480-d0f6-11ea-8752-ff93b9b1c367.png)
+
 
 Giriş yaptıktan sonra size bir hoşgeldiniz demek istedik.Welcome butonuna bastıktan sonra devam edebilirsiniz.
 

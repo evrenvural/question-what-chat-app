@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:group_6/core/widgets/my_message_widget.dart';
+import 'package:group_6/core/widgets/your_message_widget.dart';
 import 'package:group_6/model/category.dart';
 import 'package:group_6/model/message.dart';
 import 'package:group_6/provider/user_provider.dart';
@@ -40,6 +43,16 @@ class MessageList extends StatelessWidget {
 
   Widget buildMessageView(Message message) {
     final currentUser = UserProvider().currentUser;
+    return buildMyMessageWidget(currentUser, message);
+  }
+
+  Widget buildMyMessageWidget(FirebaseUser user, Message message) {
+    return user.uid == message.user.id
+        ? MyMessageWidget(user: user, message: message)
+        : YourMessageWidget(user: user, message: message);
+  }
+
+  Card buildOldMessageCard(FirebaseUser currentUser, Message message) {
     return Card(
       margin: EdgeInsets.all(5),
       color: currentUser.uid == message.user.id

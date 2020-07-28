@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:group_6/core/my_colors.dart';
 import 'package:group_6/model/message.dart';
 
-class MyMessageWidget extends StatelessWidget {
-  const MyMessageWidget({
+class YourMessageWidget extends StatelessWidget {
+  const YourMessageWidget({
     Key key,
     @required this.message,
     @required this.user,
@@ -17,13 +17,11 @@ class MyMessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.015,
-          bottom: MediaQuery.of(context).size.height * 0.015,
-          right: MediaQuery.of(context).size.width * 0.01),
+      margin:
+          EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.03, left: MediaQuery.of(context).size.width * 0.01),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildMessageInfo(context),
           buildMessageBox(context),
@@ -34,10 +32,10 @@ class MyMessageWidget extends StatelessWidget {
 
   Container buildMessageInfo(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 12.0, right: 24.0),
+      padding: const EdgeInsets.only(top: 7.0, bottom: 6.0, left: 24.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           buildMessageInfoName(context),
           // buildMessageInfoAvatar(),
@@ -52,7 +50,7 @@ class MyMessageWidget extends StatelessWidget {
       style: Theme.of(context)
           .textTheme
           .headline6
-          .copyWith(color: MyColors.PURPLE, fontWeight: FontWeight.w900),
+          .copyWith(color: MyColors.BLUE, fontWeight: FontWeight.w900),
     );
   }
 
@@ -69,7 +67,7 @@ class MyMessageWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.7,
       padding: EdgeInsets.symmetric(
           vertical: MediaQuery.of(context).size.height * 0.03,
-          horizontal: MediaQuery.of(context).size.height * 0.07),
+          horizontal: MediaQuery.of(context).size.height * 0.03),
       decoration: buidBorderDecoration(),
       child: buildMessageText(context),
     );
@@ -77,11 +75,11 @@ class MyMessageWidget extends StatelessWidget {
 
   BoxDecoration buidBorderDecoration() {
     return BoxDecoration(
-      color: MyColors.PURPLE,
+      color: MyColors.BLUE,
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(180.0),
-        bottomLeft: Radius.circular(180.0),
-        topRight: Radius.circular(120.0),
+        topRight: Radius.circular(180.0),
+        bottomRight: Radius.circular(180.0),
+        topLeft: Radius.circular(120.0),
       ),
     );
   }

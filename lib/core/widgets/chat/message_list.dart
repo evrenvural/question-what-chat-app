@@ -30,6 +30,8 @@ class _MessageListState extends State<MessageList> {
 
   _MessageListState(this.category);
 
+  GlobalKey key = GlobalKey();
+
   onMessagesAdd(DataSnapshot rawMessage) {
     messages.add(Message.fromJsom(rawMessage.value));
     setState(() {
@@ -46,9 +48,10 @@ class _MessageListState extends State<MessageList> {
       setState(() {
         loading = true;
         category = currentCategory;
+        key = GlobalKey();
       });
       //messages.clear();
-     // MessageService().listenMessageLoad(currentCategory, onMessagesAdd);
+      // MessageService().listenMessageLoad(currentCategory, onMessagesAdd);
     };
 
     CategoryProvider().onCategoryChange(category);
@@ -69,6 +72,7 @@ class _MessageListState extends State<MessageList> {
     }*/
     return MyFirebaseAnimatedList(
       query: MessageService().messageQuery(category),
+      key: key,
       reverse: true,
       itemBuilder: (context, snapshot, animation, index) {
         return buildMessageView(Message.fromJsom(snapshot.value));

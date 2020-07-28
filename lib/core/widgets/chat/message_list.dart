@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:group_6/core/widgets/my_message_widget.dart';
+import 'package:group_6/core/widgets/mylist.dart';
 import 'package:group_6/core/widgets/your_message_widget.dart';
 import 'package:group_6/model/category.dart';
 import 'package:group_6/model/message.dart';
@@ -44,9 +45,10 @@ class _MessageListState extends State<MessageList> {
     CategoryProvider().onCategoryChange = (currentCategory) {
       setState(() {
         loading = true;
+        category = currentCategory;
       });
-      messages.clear();
-      MessageService().listenMessageLoad(currentCategory, onMessagesAdd);
+      //messages.clear();
+     // MessageService().listenMessageLoad(currentCategory, onMessagesAdd);
     };
 
     CategoryProvider().onCategoryChange(category);
@@ -54,7 +56,7 @@ class _MessageListState extends State<MessageList> {
 
   @override
   Widget build(BuildContext context) {
-    if (loading) {
+    /*if (loading) {
       return Center(child: CircularProgressIndicator());
     } else {
       return ListView.builder(
@@ -64,7 +66,14 @@ class _MessageListState extends State<MessageList> {
           return buildMessageView(messagesReversed[index]);
         },
       );
-    }
+    }*/
+    return MyFirebaseAnimatedList(
+      query: MessageService().messageQuery(category),
+      reverse: true,
+      itemBuilder: (context, snapshot, animation, index) {
+        return buildMessageView(Message.fromJsom(snapshot.value));
+      },
+    );
   }
 
   Widget buildMessageView(Message message) {

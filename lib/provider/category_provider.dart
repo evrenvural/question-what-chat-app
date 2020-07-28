@@ -1,20 +1,29 @@
-
 import 'package:group_6/model/category.dart';
 
 class CategoryProvider {
-  
-  Future<List<Category>> getCategories() async{
-    return testData;//fetch from firebase
+  Future<List<Category>> getCategories() async {
+    return testData; //fetch from firebase
   }
-  
-  static final CategoryProvider _categoryProvider = CategoryProvider._internal();
-  
+
+  Category _currentCategory;
+
+  Category get currentCategory => _currentCategory;
+
+  set currentCategory(Category currentCategory) {
+    _currentCategory = currentCategory;
+    onCategoryChange?.call(_currentCategory);
+  }
+
+  Function(Category) onCategoryChange;
+
+  static final CategoryProvider _categoryProvider =
+      CategoryProvider._internal();
+
   factory CategoryProvider() {
     return _categoryProvider;
   }
-  
+
   CategoryProvider._internal();
-  
 }
 
 const testData = <Category>[

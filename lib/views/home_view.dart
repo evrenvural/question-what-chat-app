@@ -20,6 +20,7 @@ class HomeView extends StatelessWidget {
       backgroundColor: Colors.white,
       key: _drawerKey,
       appBar: AppBarWidget(
+        titleText: "Question What",
         onPressed: () => _drawerKey.currentState.openDrawer(),
       ),
       drawer: MenuWidget(
